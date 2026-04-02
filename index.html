@@ -20,7 +20,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
-  <link rel="preload" as="image" href="./ref/background.jpeg">
 
   <style>
     /* ─── Reset ─────────────────────────────────────────────────────── */
@@ -196,14 +195,42 @@
     /* ─── Hero ───────────────────────────────────────────────────────── */
     #hero {
       position: relative;
-      min-height: 100vh;
+      min-height: 90vh;
       display: flex;
       align-items: center;
       padding-top: 70px;
-      background-image: url('./ref/background.jpeg');
-      background-size: cover;
-      background-position: center center;
-      background-repeat: no-repeat;
+      background: #050505;
+      overflow: hidden;
+    }
+
+    .hero-video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      z-index: 0;
+    }
+
+    .hero-grain {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      opacity: 0.055;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 220px 220px;
+      animation: grain-shift 0.45s steps(1) infinite;
+    }
+
+    @keyframes grain-shift {
+      0%   { background-position:   0px    0px;  }
+      25%  { background-position: -55px  -30px;  }
+      50%  { background-position: -110px -60px;  }
+      75%  { background-position:  30px  -90px;  }
+      100% { background-position: -80px   20px;  }
     }
 
     .hero-overlay {
@@ -234,13 +261,19 @@
 
     .hero-title {
       font-size: var(--text-hero);
-      font-weight: 600;
-      color: var(--color-text);
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.82);
       line-height: 1.08;
       letter-spacing: -0.02em;
       margin-bottom: 1.5rem;
       opacity: 0;
       animation: fadeSlideIn var(--dur-hero) var(--ease) 0.25s both;
+    }
+
+    .hero-title strong {
+      font-weight: 700;
+      color: var(--color-text);
+      letter-spacing: -0.03em;
     }
 
     .hero-subtitle {
@@ -331,12 +364,15 @@
 
     /* ─── Ecosystem ──────────────────────────────────────────────────── */
     #ecosystem {
-      padding-block: var(--space-lg) var(--space-xl);
+      min-height: 180px;
+      display: flex;
+      align-items: center;
       border-top: 1px solid var(--color-border);
     }
 
     .ecosystem-inner {
       text-align: center;
+      width: 100%;
     }
 
     .ecosystem-text {
@@ -386,7 +422,7 @@
       width: 18px;
       height: 18px;
       flex-shrink: 0;
-      stroke: currentColor;
+      stroke: #B3ED1F;
       fill: none;
     }
 
@@ -400,27 +436,26 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 0.6rem;
+      gap: 0.5rem;
       text-align: center;
     }
 
-    .footer-info {
-      font-size: var(--text-xs);
+    .footer-single-line {
+      font-size: 14px;
       color: var(--color-subtle);
-      line-height: 1.6;
+      line-height: 1.7;
     }
 
-    .footer-copy {
-      font-size: var(--text-xs);
-      color: var(--color-subtle);
-      margin-top: 0.25rem;
+    .footer-divider {
+      color: var(--color-border2);
+      margin-inline: 0.5rem;
+      user-select: none;
     }
 
     .footer-nav {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
-      margin-top: 0.5rem;
+      gap: 0.4rem;
       flex-wrap: wrap;
       justify-content: center;
     }
@@ -440,6 +475,10 @@
       user-select: none;
     }
 
+    @media (max-width: 767px) {
+      .footer-single-line { font-size: 0.65rem; }
+    }
+
     /* ─── Animations ─────────────────────────────────────────────────── */
     @keyframes fadeSlideIn {
       from {
@@ -457,38 +496,83 @@
       .verticais-grid {
         grid-template-columns: repeat(2, 1fr);
       }
+
+      .hero-content {
+        max-width: 100%;
+      }
     }
 
     /* ─── Responsive — Mobile ────────────────────────────────────────── */
     @media (max-width: 767px) {
+      :root {
+        --space-xl: 3.5rem;
+        --space-lg: 2.5rem;
+      }
+
       .verticais-grid {
         grid-template-columns: 1fr;
-        gap: 1rem;
+        gap: 0.875rem;
       }
 
       .contact-inner {
         flex-direction: column;
         align-items: flex-start;
-        gap: 1.5rem;
+        gap: 1.25rem;
       }
 
-      .hero-subtitle {
-        font-size: var(--text-lg);
+      .ecosystem-text {
+        font-size: var(--text-xl);
+      }
+
+      .footer-single-line {
+        font-size: 12px;
       }
     }
 
     /* ─── Responsive — Small Mobile ──────────────────────────────────── */
     @media (max-width: 479px) {
+      :root {
+        --space-xl: 2.75rem;
+        --space-lg: 2rem;
+      }
+
+      #site-header {
+        height: 60px;
+      }
+
+      #hero {
+        padding-top: 60px;
+      }
+
       .logo-link svg {
-        width: 108px;
+        width: 100px;
+      }
+
+      .lang-btn {
+        font-size: 0.75rem;
+        padding: 0.25rem 0.3rem;
+      }
+
+      .hero-content {
+        padding-block: var(--space-lg);
       }
 
       .hero-label {
-        font-size: 0.7rem;
+        font-size: 0.65rem;
+        margin-bottom: 0.875rem;
       }
 
-      .footer-info {
-        font-size: 0.65rem;
+      .section-label {
+        margin-bottom: 1.75rem;
+      }
+
+      .vertical-card {
+        padding: 1.5rem 1.375rem;
+      }
+
+      .footer-single-line {
+        font-size: 11px;
+        word-break: break-word;
       }
     }
 
@@ -554,15 +638,19 @@
          HERO
     ════════════════════════════════════════════════════════════════════════ -->
     <section id="hero" aria-labelledby="hero-title">
+      <video class="hero-video" autoplay muted loop playsinline aria-hidden="true">
+        <source src="./ref/video-bg2.mp4" type="video/mp4">
+      </video>
+      <div class="hero-grain" aria-hidden="true"></div>
       <div class="hero-overlay" aria-hidden="true"></div>
       <div class="container">
         <div class="hero-content">
           <p class="hero-label" data-i18n="heroLabel">Parceiro Estratégico</p>
-          <h1 id="hero-title" class="hero-title" data-i18n="heroTitle">
-            Parceiro Estratégico em Tecnologia &amp; Operações
+          <h1 id="hero-title" class="hero-title" data-i18n-html="heroTitle">
+            Parceiro Estratégico em <strong>Tecnologia &amp; Operações</strong>
           </h1>
-          <p class="hero-subtitle" data-i18n="heroSubtitle">
-            Site completo em breve. Enquanto isso, estamos construindo o futuro da sua infraestrutura.
+          <p class="hero-subtitle" data-i18n-html="heroSubtitle">
+            Site completo em breve. Enquanto isso, estamos construindo<br>o futuro da sua infraestrutura.
           </p>
         </div>
       </div>
@@ -698,16 +786,16 @@
           <article class="vertical-card">
             <div class="card-icon" aria-hidden="true">
               <svg viewBox="0 0 40 40" fill="none" stroke="#B3ED1F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <!-- Gear outer ring -->
-                <path d="M20 6.5 L22.2 4.5 L24.8 5.8 L25.2 8.6 L27.6 9.8 L30.2 8.6 L32.2 10.6 L31 13.2 L32.2 15.6 L35 16 L35.5 18.8 L33.5 21 L33.5 23 L35.5 25.2 L35 28 L32.2 28.4 L31 30.8 L32.2 33.4 L30.2 35.4 L27.6 34.2 L25.2 35.4 L24.8 38.2 L22.2 39.5 L20 37.5 L17.8 39.5 L15.2 38.2 L14.8 35.4 L12.4 34.2 L9.8 35.4 L7.8 33.4 L9 30.8 L7.8 28.4 L5 28 L4.5 25.2 L6.5 23 L6.5 21 L4.5 18.8 L5 16 L7.8 15.6 L9 13.2 L7.8 10.6 L9.8 8.6 L12.4 9.8 L14.8 8.6 L15.2 5.8 L17.8 4.5 Z"/>
-                <!-- Gear inner circle -->
-                <circle cx="20" cy="22" r="5.5"/>
-                <!-- Rising bar chart inside gear (strategy/growth) -->
-                <line x1="15.5" y1="24.5" x2="15.5" y2="22"/>
-                <line x1="18"   y1="24.5" x2="18"   y2="20"/>
-                <line x1="20.5" y1="24.5" x2="20.5" y2="18.5"/>
-                <line x1="23"   y1="24.5" x2="23"   y2="21"/>
-                <line x1="14.5" y1="24.5" x2="24" y2="24.5"/>
+                <!-- 8-tooth gear, mathematically placed -->
+                <path d="M17.4,9.8 L18.0,5.6 L22.0,5.6 L22.6,9.8
+                         L25.3,11.0 L28.7,8.4 L31.6,11.3 L29.1,14.7
+                         L30.2,17.4 L34.4,18.0 L34.4,22.0 L30.2,22.6
+                         L29.1,25.3 L31.6,28.7 L28.7,31.6 L25.3,29.1
+                         L22.6,30.2 L22.0,34.4 L18.0,34.4 L17.4,30.2
+                         L14.7,29.1 L11.3,31.6 L8.4,28.7 L10.9,25.3
+                         L9.8,22.6 L5.6,22.0 L5.6,18.0 L9.8,17.4
+                         L10.9,14.7 L8.4,11.3 L11.3,8.4 L14.7,10.9 Z"/>
+                <circle cx="20" cy="20" r="5.5"/>
               </svg>
             </div>
             <h3 class="card-name" data-i18n="v6Name">Estratégia &amp; Operações</h3>
@@ -776,18 +864,11 @@
   ════════════════════════════════════════════════════════════════════════ -->
   <footer id="site-footer" role="contentinfo">
     <div class="container footer-inner">
-      <p class="footer-info">SYPHRA TECNOLOGIA LTDA — CNPJ 54.102.907/0001-90</p>
-      <p class="footer-info">Av. Ver. José Diniz, 3720 — Edif. Work Center — Santo Amaro — São Paulo/SP — 04620-900</p>
-      <p class="footer-copy" data-i18n="copyright">© 2024–2026 Syphra Tecnologia. Todos os direitos reservados.</p>
-      <nav class="footer-nav" aria-label="Links institucionais (em breve)">
-        <span class="footer-link-disabled" aria-disabled="true" data-i18n="footerAbout">Sobre</span>
-        <span class="footer-sep" aria-hidden="true">|</span>
-        <span class="footer-link-disabled" aria-disabled="true" data-i18n="footerSolutions">Soluções</span>
-        <span class="footer-sep" aria-hidden="true">|</span>
-        <span class="footer-link-disabled" aria-disabled="true" data-i18n="footerPartners">Parceiros</span>
-        <span class="footer-sep" aria-hidden="true">|</span>
-        <span class="footer-link-disabled" aria-disabled="true" data-i18n="footerContact">Contato</span>
-      </nav>
+      <p class="footer-single-line">
+        <span data-i18n="copyright">© 2024–2026 Syphra Tecnologia. Todos os direitos reservados.</span>
+        <span class="footer-divider" aria-hidden="true">|</span>
+        <span>Av. Ver. José Diniz, 3720 — Edif. Work Center — Santo Amaro — São Paulo/SP — 04620-900</span>
+      </p>
     </div>
   </footer>
 
@@ -799,8 +880,8 @@
     var i18n = {
       pt: {
         heroLabel:       "Parceiro Estratégico",
-        heroTitle:       "Parceiro Estratégico em Tecnologia & Operações",
-        heroSubtitle:    "Site completo em breve. Enquanto isso, estamos construindo o futuro da sua infraestrutura.",
+        heroTitle:       "Parceiro Estratégico em <strong>Tecnologia &amp; Operações</strong>",
+        heroSubtitle:    "Site completo em breve. Enquanto isso, estamos construindo<br>o futuro da sua infraestrutura.",
         verticaisLabel:  "Verticais de Atuação",
         verticaisTitle:  "Verticais de Atuação",
         ecosystemText:   "\u201cIntegramos soluções dos principais fabricantes globais para cada projeto.\u201d",
@@ -818,8 +899,8 @@
       },
       en: {
         heroLabel:       "Strategic Partner",
-        heroTitle:       "Strategic Technology & Operations Partner",
-        heroSubtitle:    "Full website coming soon. In the meantime, we\u2019re building the future of your infrastructure.",
+        heroTitle:       "Strategic <strong>Technology &amp; Operations Partner</strong>",
+        heroSubtitle:    "Full website coming soon. In the meantime, we\u2019re building<br>the future of your infrastructure.",
         verticaisLabel:  "Service Verticals",
         verticaisTitle:  "Service Verticals",
         ecosystemText:   "\u201cWe integrate solutions from leading global manufacturers for every project.\u201d",
@@ -837,8 +918,8 @@
       },
       es: {
         heroLabel:       "Socio Estratégico",
-        heroTitle:       "Socio Estratégico en Tecnología y Operaciones",
-        heroSubtitle:    "Sitio web completo próximamente. Mientras tanto, estamos construyendo el futuro de su infraestructura.",
+        heroTitle:       "Socio Estratégico en <strong>Tecnología y Operaciones</strong>",
+        heroSubtitle:    "Sitio web completo próximamente. Mientras tanto, estamos construyendo<br>el futuro de su infraestructura.",
         verticaisLabel:  "Verticales de Actuación",
         verticaisTitle:  "Verticales de Actuación",
         ecosystemText:   "\u201cIntegramos soluciones de los principales fabricantes globales para cada proyecto.\u201d",
@@ -856,8 +937,8 @@
       },
       zh: {
         heroLabel:       "战略合作伙伴",
-        heroTitle:       "战略技术与运营合作伙伴",
-        heroSubtitle:    "完整网站即将上线。我们正在构建您基础设施的未来。",
+        heroTitle:       "<strong>战略技术与运营</strong>合作伙伴",
+        heroSubtitle:    "完整网站即将上线。我们正在构建<br>您基础设施的未来。",
         verticaisLabel:  "业务板块",
         verticaisTitle:  "业务板块",
         ecosystemText:   "\u201c我们为每个项目整合全球主要厂商的解决方案。\u201d",
@@ -890,13 +971,23 @@
       };
       document.title = titles[lang];
 
-      // Translate all data-i18n elements
+      // Translate all data-i18n elements (text)
       var elements = document.querySelectorAll('[data-i18n]');
       for (var i = 0; i < elements.length; i++) {
         var el = elements[i];
         var key = el.getAttribute('data-i18n');
         if (i18n[lang][key] !== undefined) {
           el.textContent = i18n[lang][key];
+        }
+      }
+
+      // Translate data-i18n-html elements (innerHTML — trusted static strings)
+      var htmlElements = document.querySelectorAll('[data-i18n-html]');
+      for (var k = 0; k < htmlElements.length; k++) {
+        var hel = htmlElements[k];
+        var hkey = hel.getAttribute('data-i18n-html');
+        if (i18n[lang][hkey] !== undefined) {
+          hel.innerHTML = i18n[lang][hkey];
         }
       }
 
