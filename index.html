@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Syphra Tecnologia — Parceiro Estratégico em Tecnologia &amp; Operações</title>
+  <meta name="description" content="Syphra Tecnologia: parceiro estratégico em Cybersecurity, Cloud &amp; Infrastructure, AI &amp; Automation, IoT, Transformação Digital e Setor Público. São Paulo, Brasil.">
+  <link rel="canonical" href="https://syphra.com.br/">
+  <meta property="og:title" content="Syphra Tecnologia">
+  <meta property="og:description" content="Parceiro Estratégico em Tecnologia &amp; Operações">
+  <meta property="og:image" content="./ref/background.jpeg">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://syphra.com.br/">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Syphra Tecnologia">
+  <meta name="twitter:description" content="Parceiro Estratégico em Tecnologia &amp; Operações">
+  <meta name="robots" content="index, follow">
+  <link rel="icon" href="./favicon/favicon-dark.svg" media="(prefers-color-scheme: light)">
+  <link rel="icon" href="./favicon/favicon-light.svg" media="(prefers-color-scheme: dark)">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="./ref/background.jpeg">
+
+  <style>
+    /* ─── Reset ─────────────────────────────────────────────────────── */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* ─── Design Tokens ─────────────────────────────────────────────── */
+    :root {
+      --color-bg:       #050505;
+      --color-accent:   #B3ED1F;
+      --color-text:     #ffffff;
+      --color-muted:    #9a9a9a;
+      --color-subtle:   #666666;
+      --color-surface:  #0f0f0f;
+      --color-surface2: #141414;
+      --color-border:   #1e1e1e;
+      --color-border2:  #2a2a2a;
+      --hero-overlay:   rgba(0, 0, 0, 0.62);
+
+      --font-base: 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
+
+      --text-xs:   clamp(0.6875rem, 0.5vw + 0.6rem,  0.75rem);
+      --text-sm:   clamp(0.8125rem, 0.6vw + 0.72rem, 0.875rem);
+      --text-base: clamp(0.9375rem, 0.8vw + 0.8rem,  1rem);
+      --text-lg:   clamp(1rem,      1vw  + 0.85rem,  1.125rem);
+      --text-xl:   clamp(1.125rem,  1.2vw + 0.95rem, 1.375rem);
+      --text-2xl:  clamp(1.375rem,  2vw  + 0.9rem,   1.875rem);
+      --text-hero: clamp(2rem,      4vw  + 1rem,     3.625rem);
+
+      --space-xs:  0.5rem;
+      --space-sm:  1rem;
+      --space-md:  2rem;
+      --space-lg:  3.5rem;
+      --space-xl:  5.5rem;
+
+      --max-width: 1240px;
+      --gutter:    clamp(1.25rem, 5vw, 4rem);
+
+      --radius-sm: 4px;
+      --radius-md: 8px;
+      --radius-lg: 14px;
+
+      --ease:      cubic-bezier(0.4, 0, 0.2, 1);
+      --dur-fast:  0.18s;
+      --dur-base:  0.35s;
+      --dur-hero:  0.85s;
+    }
+
+    /* ─── Base ───────────────────────────────────────────────────────── */
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      background-color: var(--color-bg);
+      color: var(--color-text);
+      font-family: var(--font-base);
+      font-size: var(--text-base);
+      font-weight: 400;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+
+    img { max-width: 100%; display: block; }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+
+    /* ─── Layout ─────────────────────────────────────────────────────── */
+    .container {
+      width: 100%;
+      max-width: var(--max-width);
+      margin-inline: auto;
+      padding-inline: var(--gutter);
+    }
+
+    /* ─── Header ─────────────────────────────────────────────────────── */
+    #site-header {
+      position: fixed;
+      inset-block-start: 0;
+      inset-inline: 0;
+      z-index: 100;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      background: rgba(5, 5, 5, 0.82);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+
+    .logo-link {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+      transition: opacity var(--dur-fast) var(--ease);
+    }
+
+    .logo-link:hover { opacity: 0.85; }
+
+    .logo-link svg {
+      width: 136px;
+      height: auto;
+      display: block;
+    }
+
+    #lang-nav {
+      display: flex;
+      align-items: center;
+      gap: 0.15rem;
+    }
+
+    .lang-btn {
+      background: none;
+      border: none;
+      color: var(--color-subtle);
+      font-size: var(--text-sm);
+      font-weight: 500;
+      letter-spacing: 0.055em;
+      padding: 0.3rem 0.45rem;
+      border-radius: var(--radius-sm);
+      transition: color var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease);
+      line-height: 1;
+    }
+
+    .lang-btn:hover {
+      color: var(--color-text);
+    }
+
+    .lang-btn.active {
+      color: var(--color-accent);
+    }
+
+    .lang-sep {
+      color: var(--color-border2);
+      font-size: var(--text-sm);
+      user-select: none;
+      pointer-events: none;
+    }
+
+    /* ─── Hero ───────────────────────────────────────────────────────── */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 70px;
+      background-image: url('./ref/background.jpeg');
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: var(--hero-overlay);
+      z-index: 0;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      padding-block: var(--space-xl);
+      max-width: 780px;
+    }
+
+    .hero-label {
+      display: inline-block;
+      font-size: var(--text-sm);
+      font-weight: 500;
+      color: var(--color-accent);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 1.25rem;
+      opacity: 0;
+      animation: fadeSlideIn var(--dur-hero) var(--ease) 0.1s both;
+    }
+
+    .hero-title {
+      font-size: var(--text-hero);
+      font-weight: 600;
+      color: var(--color-text);
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeSlideIn var(--dur-hero) var(--ease) 0.25s both;
+    }
+
+    .hero-subtitle {
+      font-size: var(--text-xl);
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.72);
+      line-height: 1.6;
+      max-width: 56ch;
+      opacity: 0;
+      animation: fadeSlideIn var(--dur-hero) var(--ease) 0.42s both;
+    }
+
+    /* ─── Verticais ──────────────────────────────────────────────────── */
+    #verticais {
+      padding-block: var(--space-xl);
+      border-top: 1px solid var(--color-border);
+    }
+
+    .section-label {
+      display: block;
+      font-size: var(--text-sm);
+      font-weight: 500;
+      color: var(--color-accent);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 2.75rem;
+    }
+
+    .verticais-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+    }
+
+    .vertical-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: 2rem 1.875rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.125rem;
+      transition:
+        border-color var(--dur-base) var(--ease),
+        transform    var(--dur-base) var(--ease),
+        box-shadow   var(--dur-base) var(--ease),
+        background   var(--dur-base) var(--ease);
+    }
+
+    .vertical-card:hover {
+      border-color: var(--color-accent);
+      transform: translateY(-5px);
+      box-shadow: 0 16px 48px rgba(179, 237, 31, 0.07);
+      background: var(--color-surface2);
+    }
+
+    .card-icon {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    .card-icon svg {
+      width: 40px;
+      height: 40px;
+      flex-shrink: 0;
+      transition: filter var(--dur-base) var(--ease);
+    }
+
+    .vertical-card:hover .card-icon svg {
+      filter: drop-shadow(0 0 8px rgba(179, 237, 31, 0.5));
+    }
+
+    .card-name {
+      font-size: var(--text-lg);
+      font-weight: 500;
+      color: var(--color-text);
+      letter-spacing: -0.01em;
+      line-height: 1.3;
+    }
+
+    .card-tags {
+      font-size: var(--text-sm);
+      color: var(--color-muted);
+      line-height: 1.55;
+      font-weight: 400;
+    }
+
+    /* ─── Ecosystem ──────────────────────────────────────────────────── */
+    #ecosystem {
+      padding-block: var(--space-lg) var(--space-xl);
+      border-top: 1px solid var(--color-border);
+    }
+
+    .ecosystem-inner {
+      text-align: center;
+    }
+
+    .ecosystem-text {
+      font-size: var(--text-2xl);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--color-muted);
+      line-height: 1.5;
+      max-width: 68ch;
+      margin-inline: auto;
+      letter-spacing: 0.005em;
+    }
+
+    /* ─── Contact ────────────────────────────────────────────────────── */
+    #contato {
+      padding-block: var(--space-lg);
+      border-top: 1px solid var(--color-border);
+    }
+
+    .contact-inner {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 2.75rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: var(--text-base);
+      color: var(--color-muted);
+      transition: color var(--dur-fast) var(--ease);
+      cursor: default;
+    }
+
+    a.contact-item {
+      cursor: pointer;
+    }
+
+    a.contact-item:hover {
+      color: var(--color-accent);
+    }
+
+    .contact-item svg {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      stroke: currentColor;
+      fill: none;
+    }
+
+    /* ─── Footer ─────────────────────────────────────────────────────── */
+    #site-footer {
+      padding-block: var(--space-md);
+      border-top: 1px solid var(--color-border);
+    }
+
+    .footer-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.6rem;
+      text-align: center;
+    }
+
+    .footer-info {
+      font-size: var(--text-xs);
+      color: var(--color-subtle);
+      line-height: 1.6;
+    }
+
+    .footer-copy {
+      font-size: var(--text-xs);
+      color: var(--color-subtle);
+      margin-top: 0.25rem;
+    }
+
+    .footer-nav {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .footer-link-disabled {
+      font-size: var(--text-xs);
+      color: var(--color-border2);
+      cursor: default;
+      user-select: none;
+      pointer-events: none;
+      letter-spacing: 0.03em;
+    }
+
+    .footer-sep {
+      color: var(--color-border);
+      font-size: var(--text-xs);
+      user-select: none;
+    }
+
+    /* ─── Animations ─────────────────────────────────────────────────── */
+    @keyframes fadeSlideIn {
+      from {
+        opacity: 0;
+        transform: translateY(22px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ─── Responsive — Tablet ────────────────────────────────────────── */
+    @media (max-width: 1023px) {
+      .verticais-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    /* ─── Responsive — Mobile ────────────────────────────────────────── */
+    @media (max-width: 767px) {
+      .verticais-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      .contact-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.5rem;
+      }
+
+      .hero-subtitle {
+        font-size: var(--text-lg);
+      }
+    }
+
+    /* ─── Responsive — Small Mobile ──────────────────────────────────── */
+    @media (max-width: 479px) {
+      .logo-link svg {
+        width: 108px;
+      }
+
+      .hero-label {
+        font-size: 0.7rem;
+      }
+
+      .footer-info {
+        font-size: 0.65rem;
+      }
+    }
+
+    /* ─── Reduced Motion ─────────────────────────────────────────────── */
+    @media (prefers-reduced-motion: reduce) {
+      .hero-label,
+      .hero-title,
+      .hero-subtitle {
+        animation: none;
+        opacity: 1;
+        transform: none;
+      }
+
+      .vertical-card {
+        transition: border-color var(--dur-fast) linear;
+      }
+
+      .vertical-card:hover {
+        transform: none;
+      }
+
+      html {
+        scroll-behavior: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════════════════════════════
+       HEADER
+  ════════════════════════════════════════════════════════════════════════ -->
+  <header id="site-header" role="banner">
+    <div class="container header-inner">
+
+      <!-- Logo: logo_0.svg inline -->
+      <a href="#hero" class="logo-link" aria-label="Syphra Tecnologia — página inicial">
+        <svg width="572" height="158" viewBox="0 0 572 158" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Syphra Tecnologia" role="img">
+          <title>Syphra Tecnologia</title>
+          <path d="M132.776 99.0527L160.06 34.79H181.85L145.039 121.41C142.359 127.88 139.369 133.37 136.069 137.89C132.769 142.4 129.079 146.13 124.989 149.06C120.899 151.989 116.32 154.13 111.26 155.47C106.19 156.81 100.549 157.479 94.3193 157.479V137.34C98.4693 137.34 102.13 136.939 105.31 136.149C108.479 135.349 111.29 134.07 113.729 132.3C116.169 130.53 118.399 128.24 120.409 125.43C122.429 122.62 124.29 119.139 126 114.989L130.579 104.37H113.18L83.6992 34.7793H105.489L132.776 99.0527ZM237.72 34.7793C243.95 34.7793 249.81 35.9398 255.3 38.2598C260.789 40.5797 265.549 43.7496 269.579 47.7793H269.59C273.62 51.8093 276.789 56.5397 279.109 61.9697C281.429 67.3997 282.59 73.4097 282.59 79.6396C282.59 85.8696 281.459 91.7297 279.199 97.2197C276.939 102.71 273.889 107.47 270.039 111.5C266.199 115.53 261.649 118.7 256.399 121.02C251.149 123.34 245.469 124.5 239.369 124.5C234.249 124.5 229.48 123.7 225.09 122.12C220.69 120.54 216.659 118.339 212.999 115.529V157.47H192.859V67.7393H212.999V79.6396C212.999 83.0596 213.64 86.2996 214.92 89.3496C216.2 92.3996 217.94 95.0198 220.14 97.2197C222.33 99.4197 224.93 101.159 227.92 102.439C230.91 103.719 234.31 104.359 237.72 104.359C241.13 104.359 244.339 103.719 247.329 102.439C250.319 101.159 252.939 99.4196 255.199 97.2197C257.459 95.0297 259.23 92.3996 260.51 89.3496C261.79 86.2997 262.43 83.1796 262.43 79.6396C262.43 76.0997 261.79 72.8298 260.51 69.8398C259.23 66.8498 257.459 64.2596 255.199 62.0596C252.939 59.8596 250.319 58.1198 247.329 56.8398C244.339 55.56 241.14 54.92 237.72 54.9199H192.85V34.7793H237.72ZM536.029 91.9199C536.029 95.8298 537.16 98.8801 539.42 101.08V101.06C541.68 103.259 544.82 104.359 548.85 104.359V124.5C543.23 124.5 538.14 123.399 533.56 121.199C528.98 118.999 525.289 115.95 522.479 112.04C518.45 115.95 513.78 118.999 508.47 121.199C503.16 123.399 497.389 124.5 491.159 124.5C484.929 124.5 479.069 123.339 473.579 121.02C468.089 118.71 463.33 115.53 459.3 111.5C455.27 107.48 452.099 102.71 449.779 97.2197C447.459 91.7297 446.3 85.9796 446.3 79.6396C446.3 73.2997 447.459 67.3997 449.779 61.9697C452.089 56.5397 455.27 51.8093 459.3 47.7793C463.32 43.7496 468.089 40.5797 473.579 38.2598C479.069 35.9398 484.929 34.7793 491.159 34.7793H536.029V91.9199ZM317.38 41.0195C320.55 38.4596 324.15 36.4693 328.18 35.0693C332.21 33.6594 336.54 32.96 341.18 32.96C346.79 32.96 351.95 33.9696 356.649 35.9795C361.349 37.9894 365.379 40.7995 368.739 44.3994L368.75 44.4102C372.1 48.01 374.729 52.3197 376.619 57.3193C378.509 62.3293 379.46 67.7601 379.46 73.6201V122.699H359.319V73.6201C359.319 67.3901 357.42 62.4195 353.64 58.6895C349.85 54.9595 344.789 53.0996 338.439 53.0996C332.089 53.0996 326.999 54.9695 323.149 58.6895C319.299 62.4195 317.38 67.3901 317.38 73.6201V122.699H297.239V0H317.38V41.0195ZM37.7197 32.96C43.4596 32.96 48.6799 33.7797 53.3799 35.4297C58.0797 37.0797 62.1098 39.3997 65.4697 42.3896C68.8197 45.3796 71.4499 48.9497 73.3398 53.0996C75.2298 57.2496 76.1797 61.8301 76.1797 66.8301H56.0391C56.0391 62.4401 54.2694 58.8999 50.7295 56.21C47.1896 53.52 42.4897 52.1797 36.6299 52.1797C31.8699 52.1797 27.9293 53.1892 24.8193 55.1992C21.7093 57.2092 20.1494 59.7398 20.1494 62.7998C20.1495 65.8597 21.6796 68.5096 24.7295 70.7695C27.7795 73.0295 31.5997 75.2492 36.1797 77.4492C40.7497 79.6492 45.6998 81.9702 51.0098 84.4102C56.3196 86.8501 61.26 89.7793 65.8398 93.1992L65.8291 93.21C70.409 96.6299 74.2293 100.72 77.2793 105.479C80.3293 110.239 81.8593 115.98 81.8594 122.689H61.7197C61.7197 118.18 60.1895 114.42 57.1396 111.43C54.0796 108.44 50.2695 105.719 45.6895 103.279C41.1195 100.839 36.1693 98.4895 30.8594 96.2295C25.5494 93.9795 20.6092 91.3792 16.0293 88.4492C11.4495 85.5193 7.62902 82.0098 4.5791 77.9199C1.52912 73.8299 0 68.7896 0 62.8096C9.05293e-06 58.5397 0.949938 54.5701 2.83984 50.9102C4.72984 47.2502 7.34996 44.0796 10.71 41.3896C14.0598 38.6998 18.0296 36.6201 22.6094 35.1602C27.1894 33.6902 31.9797 32.96 37.7197 32.96ZM438.97 53.0996C432.5 53.0996 427.37 54.8702 423.59 58.4102C419.8 61.9601 417.909 66.7799 417.909 72.8799V122.689H397.77V73.6094C397.77 67.3796 398.749 61.7696 400.699 56.7598C402.649 51.7498 405.429 47.4794 409.029 43.9395V43.9492C412.629 40.4093 416.959 37.6898 422.029 35.7998C427.099 33.9098 432.74 32.96 438.97 32.96V53.0996ZM491.17 54.9297C487.75 54.9297 484.55 55.5696 481.56 56.8496C478.57 58.1296 475.949 59.8694 473.689 62.0693C471.429 64.2593 469.66 66.8597 468.38 69.8496C467.1 72.8495 466.46 76.2295 466.46 79.6494C466.46 83.0694 467.1 86.3094 468.38 89.3594C469.66 92.4093 471.43 95.0295 473.689 97.2295C475.939 99.4295 478.57 101.169 481.56 102.449C484.55 103.729 487.63 104.37 491.17 104.37C494.71 104.37 497.98 103.729 500.97 102.449C503.96 101.169 506.55 99.4294 508.75 97.2295C510.95 95.0396 512.69 92.4092 513.97 89.3594C515.25 86.3095 515.89 83.0693 515.89 79.6494V54.9297H491.17ZM560.59 10.5996C560.73 10.6196 560.86 10.6494 561 10.6494C561.72 10.6994 562.429 10.8401 563.119 11.04C564.829 11.54 566.33 12.3994 567.63 13.6094C568.59 14.5094 569.37 15.54 569.97 16.71C570.68 18.0899 571.08 19.5497 571.17 21.0996L571.189 21.1094C571.249 22.1493 571.169 23.1695 570.949 24.1895C570.709 25.2594 570.319 26.2793 569.779 27.2393C569.219 28.2293 568.529 29.1194 567.699 29.8994C566.589 30.9494 565.32 31.7395 563.89 32.2695C563 32.5995 562.08 32.8201 561.13 32.9102C560.35 32.9902 559.559 32.9796 558.779 32.8896C558.089 32.8096 557.399 32.6699 556.729 32.46C555.43 32.06 554.24 31.4295 553.17 30.5996C552.36 29.9696 551.649 29.2399 551.039 28.4199C550.279 27.3799 549.699 26.2495 549.329 25.0195C549.109 24.2796 548.959 23.5296 548.899 22.7598C548.889 22.6098 548.87 22.4693 548.85 22.3193V21.2793C548.86 21.2494 548.869 21.2195 548.869 21.1797C548.899 20.5797 548.979 19.9796 549.109 19.3896C549.459 17.7898 550.129 16.3399 551.119 15.04C551.999 13.89 553.049 12.9392 554.279 12.1992C555.749 11.3092 557.35 10.7896 559.06 10.6396C559.209 10.6297 559.369 10.6096 559.529 10.5996H560.59ZM560.17 12.3301C554.83 12.2501 550.579 16.54 550.569 21.75C550.56 26.9898 554.76 31.1595 559.89 31.2295C565.22 31.2994 569.52 26.9796 569.47 21.7197C569.45 16.5599 565.29 12.4003 560.17 12.3301ZM561.159 16.6201C561.999 16.6201 562.8 16.8095 563.52 17.2295C564.209 17.6294 564.65 18.2195 564.81 19.0293C564.95 19.7493 564.91 20.4397 564.71 21.1396C564.59 21.5596 564.34 21.8897 564.02 22.1797V22.1895C563.65 22.5295 563.219 22.7401 562.739 22.8701C562.559 22.9201 562.379 22.9694 562.18 23.0293C563.01 24.3293 563.83 25.6195 564.67 26.9395H563.01C562.98 26.9395 562.929 26.9099 562.909 26.8799C562.139 25.6799 561.369 24.4793 560.609 23.2793C560.549 23.1995 560.499 23.1592 560.39 23.1592H558.3V26.9297H556.59V16.6201H561.159ZM558.369 18H558.3V21.6992H558.46C559.06 21.6992 559.67 21.6792 560.27 21.6992C560.859 21.7192 561.429 21.6399 561.989 21.46V21.4697C562.469 21.3198 562.819 21.0397 563.029 20.5898C563.209 20.2099 563.209 19.7898 563.149 19.3799C563.099 19.0999 562.989 18.8499 562.77 18.6699C562.58 18.52 562.38 18.3797 562.17 18.2598C561.82 18.0498 561.419 18.0295 561.029 18.0195C560.139 17.9895 559.259 18 558.369 18Z" fill="white"/>
+          <path d="M12.8295 98.8796C9.16951 98.8796 6.10951 100.1 3.66951 102.54C1.22951 104.98 0.00952148 108.03 0.00952148 111.7C0.00952148 115.37 1.22951 118.42 3.66951 120.86C6.10951 123.3 9.15951 124.52 12.8295 124.52C16.4995 124.52 19.5395 123.3 21.9895 120.86C24.4295 118.42 25.6495 115.37 25.6495 111.7C25.6495 108.03 24.4295 104.99 21.9895 102.54C19.5495 100.1 16.4995 98.8796 12.8295 98.8796Z" fill="#B3ED1F"/>
+        </svg>
+      </a>
+
+      <!-- Language Selector -->
+      <nav id="lang-nav" aria-label="Seletor de idioma">
+        <button class="lang-btn active" data-lang="pt" aria-pressed="true">PT</button>
+        <span class="lang-sep" aria-hidden="true">|</span>
+        <button class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
+        <span class="lang-sep" aria-hidden="true">|</span>
+        <button class="lang-btn" data-lang="es" aria-pressed="false">ES</button>
+        <span class="lang-sep" aria-hidden="true">|</span>
+        <button class="lang-btn" data-lang="zh" aria-pressed="false">中文</button>
+      </nav>
+
+    </div>
+  </header>
+
+
+  <main>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         HERO
+    ════════════════════════════════════════════════════════════════════════ -->
+    <section id="hero" aria-labelledby="hero-title">
+      <div class="hero-overlay" aria-hidden="true"></div>
+      <div class="container">
+        <div class="hero-content">
+          <p class="hero-label" data-i18n="heroLabel">Parceiro Estratégico</p>
+          <h1 id="hero-title" class="hero-title" data-i18n="heroTitle">
+            Parceiro Estratégico em Tecnologia &amp; Operações
+          </h1>
+          <p class="hero-subtitle" data-i18n="heroSubtitle">
+            Site completo em breve. Enquanto isso, estamos construindo o futuro da sua infraestrutura.
+          </p>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         VERTICAIS DE ATUAÇÃO
+    ════════════════════════════════════════════════════════════════════════ -->
+    <section id="verticais" aria-labelledby="verticais-heading">
+      <div class="container">
+
+        <span class="section-label" data-i18n="verticaisLabel">Verticais de Atuação</span>
+
+        <h2 id="verticais-heading" class="sr-only" data-i18n="verticaisTitle">Verticais de Atuação</h2>
+
+        <div class="verticais-grid">
+
+          <!-- Card 1: Cybersecurity -->
+          <article class="vertical-card">
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 40 40" fill="none" stroke="#B3ED1F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <!-- Shield -->
+                <path d="M20 4L34 9.5V20C34 28 27.5 33.5 20 37C12.5 33.5 6 28 6 20V9.5Z"/>
+                <!-- Circuit lines inside shield -->
+                <line x1="13" y1="20" x2="16.5" y2="20"/>
+                <circle cx="18" cy="20" r="1.5" fill="#B3ED1F" stroke="none"/>
+                <line x1="19.5" y1="20" x2="23" y2="20"/>
+                <line x1="23" y1="20" x2="27" y2="20"/>
+                <circle cx="27" cy="20" r="1.5" fill="#B3ED1F" stroke="none"/>
+                <line x1="18" y1="13.5" x2="18" y2="18.5"/>
+                <circle cx="18" cy="13" r="1.5" fill="#B3ED1F" stroke="none"/>
+                <line x1="18" y1="21.5" x2="18" y2="26.5"/>
+              </svg>
+            </div>
+            <h3 class="card-name" data-i18n="v1Name">Cybersecurity</h3>
+            <p class="card-tags">NGFW · Endpoint · Zero Trust</p>
+          </article>
+
+          <!-- Card 2: Cloud & Infrastructure -->
+          <article class="vertical-card">
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 40 40" fill="none" stroke="#B3ED1F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <!-- Cloud -->
+                <path d="M29 25H13A8 8 0 0 1 10.5 9.5A9 9 0 0 1 28 8A6 6 0 0 1 33 14A6 6 0 0 1 29 25Z"/>
+                <!-- Node lines dropping from cloud -->
+                <line x1="14" y1="25" x2="14" y2="30"/>
+                <line x1="20" y1="25" x2="20" y2="30"/>
+                <line x1="26" y1="25" x2="26" y2="30"/>
+                <!-- Nodes -->
+                <circle cx="14" cy="32" r="2" fill="none"/>
+                <circle cx="20" cy="32" r="2" fill="none"/>
+                <circle cx="26" cy="32" r="2" fill="none"/>
+                <!-- Horizontal connections -->
+                <line x1="16" y1="32" x2="18" y2="32"/>
+                <line x1="22" y1="32" x2="24" y2="32"/>
+              </svg>
+            </div>
+            <h3 class="card-name" data-i18n="v2Name">Cloud &amp; Infrastructure</h3>
+            <p class="card-tags">Arquitetura · Migração · Híbrida</p>
+          </article>
+
+          <!-- Card 3: AI & Automation -->
+          <article class="vertical-card">
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 40 40" fill="none" stroke="#B3ED1F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <!-- Neural network: 5 nodes, interconnected -->
+                <circle cx="20" cy="9"  r="2.5"/>
+                <circle cx="10" cy="20" r="2.5"/>
+                <circle cx="20" cy="31" r="2.5"/>
+                <circle cx="30" cy="20" r="2.5"/>
+                <circle cx="20" cy="20" r="2.5"/>
+                <!-- Outer connections -->
+                <line x1="20" y1="11.5" x2="12"  y2="18"/>
+                <line x1="20" y1="11.5" x2="28"  y2="18"/>
+                <line x1="12"  y1="22"  x2="20"  y2="28.5"/>
+                <line x1="28"  y1="22"  x2="20"  y2="28.5"/>
+                <!-- Center connections -->
+                <line x1="20" y1="11.5" x2="20" y2="17.5"/>
+                <line x1="12"  y1="20"  x2="17.5" y2="20"/>
+                <line x1="22.5" y1="20"  x2="27.5" y2="20"/>
+                <line x1="20"  y1="22.5" x2="20"  y2="28.5"/>
+              </svg>
+            </div>
+            <h3 class="card-name" data-i18n="v3Name">AI &amp; Automation</h3>
+            <p class="card-tags">Inteligência Artificial · RPA · Automação</p>
+          </article>
+
+          <!-- Card 4: IoT & Industry 4.0 -->
+          <article class="vertical-card">
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 40 40" fill="none" stroke="#B3ED1F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <!-- Factory base -->
+                <rect x="4" y="22" width="32" height="13" rx="1"/>
+                <!-- Factory roof / chimney shapes -->
+                <polyline points="4,22 4,15 11,15 11,10 19,15 19,10 27,15 36,15 36,22"/>
+                <!-- Base line -->
+                <!-- Windows -->
+                <rect x="8"  y="26" width="4" height="4" rx="0.5"/>
+                <rect x="18" y="26" width="4" height="4" rx="0.5"/>
+                <rect x="28" y="26" width="4" height="4" rx="0.5"/>
+                <!-- Wifi / signal arcs (IoT signal) -->
+                <path d="M29 7C31 7 33 8 34 10" stroke-width="1.5"/>
+                <path d="M27 5C30.5 4 35 6.5 36.5 10" stroke-width="1.5"/>
+                <!-- Dot = sensor -->
+                <circle cx="31.5" cy="12" r="1.5" fill="#B3ED1F" stroke="none"/>
+              </svg>
+            </div>
+            <h3 class="card-name" data-i18n="v4Name">IoT &amp; Industry 4.0</h3>
+            <p class="card-tags">MES · Sensoriamento · Conectividade Industrial</p>
+          </article>
+
+          <!-- Card 5: Digital Transformation -->
+          <article class="vertical-card">
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 40 40" fill="none" stroke="#B3ED1F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <!-- Outer circular arrow clockwise (top arc) -->
+                <path d="M20 7 A13 13 0 1 1 8 27"/>
+                <polyline points="5,24 8,27.5 11.5,25"/>
+                <!-- Inner circular arrow counter-clockwise (small) -->
+                <path d="M20 13 A7 7 0 1 0 27 20"/>
+                <polyline points="29.5,17.5 27,20 24,18.5"/>
+                <!-- Central data node -->
+                <circle cx="20" cy="20" r="3" fill="none"/>
+                <circle cx="20" cy="20" r="1" fill="#B3ED1F" stroke="none"/>
+              </svg>
+            </div>
+            <h3 class="card-name" data-i18n="v5Name">Transformação Digital</h3>
+            <p class="card-tags">PMO · ERP · CRM · Diagnóstico Operacional</p>
+          </article>
+
+          <!-- Card 6: Estratégia & Operações -->
+          <article class="vertical-card">
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 40 40" fill="none" stroke="#B3ED1F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <!-- Gear outer ring -->
+                <path d="M20 6.5 L22.2 4.5 L24.8 5.8 L25.2 8.6 L27.6 9.8 L30.2 8.6 L32.2 10.6 L31 13.2 L32.2 15.6 L35 16 L35.5 18.8 L33.5 21 L33.5 23 L35.5 25.2 L35 28 L32.2 28.4 L31 30.8 L32.2 33.4 L30.2 35.4 L27.6 34.2 L25.2 35.4 L24.8 38.2 L22.2 39.5 L20 37.5 L17.8 39.5 L15.2 38.2 L14.8 35.4 L12.4 34.2 L9.8 35.4 L7.8 33.4 L9 30.8 L7.8 28.4 L5 28 L4.5 25.2 L6.5 23 L6.5 21 L4.5 18.8 L5 16 L7.8 15.6 L9 13.2 L7.8 10.6 L9.8 8.6 L12.4 9.8 L14.8 8.6 L15.2 5.8 L17.8 4.5 Z"/>
+                <!-- Gear inner circle -->
+                <circle cx="20" cy="22" r="5.5"/>
+                <!-- Rising bar chart inside gear (strategy/growth) -->
+                <line x1="15.5" y1="24.5" x2="15.5" y2="22"/>
+                <line x1="18"   y1="24.5" x2="18"   y2="20"/>
+                <line x1="20.5" y1="24.5" x2="20.5" y2="18.5"/>
+                <line x1="23"   y1="24.5" x2="23"   y2="21"/>
+                <line x1="14.5" y1="24.5" x2="24" y2="24.5"/>
+              </svg>
+            </div>
+            <h3 class="card-name" data-i18n="v6Name">Estratégia &amp; Operações</h3>
+            <p class="card-tags">Diagnóstico · Roadmap · Eficiência Operacional</p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         ECOSYSTEM PHRASE
+    ════════════════════════════════════════════════════════════════════════ -->
+    <div id="ecosystem" role="note">
+      <div class="container ecosystem-inner">
+        <p class="ecosystem-text" data-i18n="ecosystemText">
+          &ldquo;Integramos soluções dos principais fabricantes globais para cada projeto.&rdquo;
+        </p>
+      </div>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         CONTACT
+    ════════════════════════════════════════════════════════════════════════ -->
+    <section id="contato" aria-label="Informações de contato">
+      <div class="container">
+        <div class="contact-inner">
+
+          <!-- Email -->
+          <a href="mailto:contato@syphra.com.br" class="contact-item" aria-label="Enviar e-mail para contato@syphra.com.br">
+            <svg viewBox="0 0 20 20" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="2" y="4" width="16" height="12" rx="2"/>
+              <polyline points="2,4.5 10,11.5 18,4.5"/>
+            </svg>
+            <span>contato@syphra.com.br</span>
+          </a>
+
+          <!-- Phone -->
+          <a href="tel:+551139261818" class="contact-item" aria-label="Ligar para +55 11 3926-1818">
+            <svg viewBox="0 0 20 20" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M4 2.5C4 2.5 5.8 2.2 6.8 4.2L8 6.8C8.5 7.8 8.2 8.8 7.4 9.5L6.5 10.2C7.5 12 8.2 13 10 14.8L10.7 14C11.4 13.2 12.4 12.9 13.4 13.4L16 14.6C18 15.6 17.7 17.5 17.7 17.5C17.7 17.5 15.5 19.5 12.5 18.5C6.5 16.5 2.5 11.5 1.5 8C0.5 4.5 4 2.5 4 2.5Z"/>
+            </svg>
+            <span>+55 11 3926-1818</span>
+          </a>
+
+          <!-- Location -->
+          <div class="contact-item" aria-label="Localização: São Paulo, SP, Brasil">
+            <svg viewBox="0 0 20 20" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M10 1.5C7 1.5 4.5 4 4.5 7.5C4.5 12.5 10 18.5 10 18.5C10 18.5 15.5 12.5 15.5 7.5C15.5 4 13 1.5 10 1.5Z"/>
+              <circle cx="10" cy="7.5" r="2.2"/>
+            </svg>
+            <span>São Paulo, SP — Brasil</span>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- ═══════════════════════════════════════════════════════════════════
+       FOOTER
+  ════════════════════════════════════════════════════════════════════════ -->
+  <footer id="site-footer" role="contentinfo">
+    <div class="container footer-inner">
+      <p class="footer-info">SYPHRA TECNOLOGIA LTDA — CNPJ 54.102.907/0001-90</p>
+      <p class="footer-info">Av. Ver. José Diniz, 3720 — Edif. Work Center — Santo Amaro — São Paulo/SP — 04620-900</p>
+      <p class="footer-copy" data-i18n="copyright">© 2024–2026 Syphra Tecnologia. Todos os direitos reservados.</p>
+      <nav class="footer-nav" aria-label="Links institucionais (em breve)">
+        <span class="footer-link-disabled" aria-disabled="true" data-i18n="footerAbout">Sobre</span>
+        <span class="footer-sep" aria-hidden="true">|</span>
+        <span class="footer-link-disabled" aria-disabled="true" data-i18n="footerSolutions">Soluções</span>
+        <span class="footer-sep" aria-hidden="true">|</span>
+        <span class="footer-link-disabled" aria-disabled="true" data-i18n="footerPartners">Parceiros</span>
+        <span class="footer-sep" aria-hidden="true">|</span>
+        <span class="footer-link-disabled" aria-disabled="true" data-i18n="footerContact">Contato</span>
+      </nav>
+    </div>
+  </footer>
+
+
+  <!-- ═══════════════════════════════════════════════════════════════════
+       JAVASCRIPT — i18n
+  ════════════════════════════════════════════════════════════════════════ -->
+  <script>
+    var i18n = {
+      pt: {
+        heroLabel:       "Parceiro Estratégico",
+        heroTitle:       "Parceiro Estratégico em Tecnologia & Operações",
+        heroSubtitle:    "Site completo em breve. Enquanto isso, estamos construindo o futuro da sua infraestrutura.",
+        verticaisLabel:  "Verticais de Atuação",
+        verticaisTitle:  "Verticais de Atuação",
+        ecosystemText:   "\u201cIntegramos soluções dos principais fabricantes globais para cada projeto.\u201d",
+        copyright:       "© 2024\u20132026 Syphra Tecnologia. Todos os direitos reservados.",
+        footerAbout:     "Sobre",
+        footerSolutions: "Soluções",
+        footerPartners:  "Parceiros",
+        footerContact:   "Contato",
+        v1Name: "Cybersecurity",
+        v2Name: "Cloud & Infrastructure",
+        v3Name: "AI & Automation",
+        v4Name: "IoT & Industry 4.0",
+        v5Name: "Transformação Digital",
+        v6Name: "Estratégia & Operações"
+      },
+      en: {
+        heroLabel:       "Strategic Partner",
+        heroTitle:       "Strategic Technology & Operations Partner",
+        heroSubtitle:    "Full website coming soon. In the meantime, we\u2019re building the future of your infrastructure.",
+        verticaisLabel:  "Service Verticals",
+        verticaisTitle:  "Service Verticals",
+        ecosystemText:   "\u201cWe integrate solutions from leading global manufacturers for every project.\u201d",
+        copyright:       "© 2024\u20132026 Syphra Tecnologia. All rights reserved.",
+        footerAbout:     "About",
+        footerSolutions: "Solutions",
+        footerPartners:  "Partners",
+        footerContact:   "Contact",
+        v1Name: "Cybersecurity",
+        v2Name: "Cloud & Infrastructure",
+        v3Name: "AI & Automation",
+        v4Name: "IoT & Industry 4.0",
+        v5Name: "Digital Transformation",
+        v6Name: "Strategy & Operations"
+      },
+      es: {
+        heroLabel:       "Socio Estratégico",
+        heroTitle:       "Socio Estratégico en Tecnología y Operaciones",
+        heroSubtitle:    "Sitio web completo próximamente. Mientras tanto, estamos construyendo el futuro de su infraestructura.",
+        verticaisLabel:  "Verticales de Actuación",
+        verticaisTitle:  "Verticales de Actuación",
+        ecosystemText:   "\u201cIntegramos soluciones de los principales fabricantes globales para cada proyecto.\u201d",
+        copyright:       "© 2024\u20132026 Syphra Tecnologia. Todos los derechos reservados.",
+        footerAbout:     "Sobre",
+        footerSolutions: "Soluciones",
+        footerPartners:  "Socios",
+        footerContact:   "Contacto",
+        v1Name: "Ciberseguridad",
+        v2Name: "Cloud & Infraestructura",
+        v3Name: "IA & Automatización",
+        v4Name: "IoT & Industria 4.0",
+        v5Name: "Transformación Digital",
+        v6Name: "Estrategia & Operaciones"
+      },
+      zh: {
+        heroLabel:       "战略合作伙伴",
+        heroTitle:       "战略技术与运营合作伙伴",
+        heroSubtitle:    "完整网站即将上线。我们正在构建您基础设施的未来。",
+        verticaisLabel:  "业务板块",
+        verticaisTitle:  "业务板块",
+        ecosystemText:   "\u201c我们为每个项目整合全球主要厂商的解决方案。\u201d",
+        copyright:       "© 2024\u20132026 Syphra Tecnologia。保留所有权利。",
+        footerAbout:     "关于",
+        footerSolutions: "解决方案",
+        footerPartners:  "合作伙伴",
+        footerContact:   "联系",
+        v1Name: "网络安全",
+        v2Name: "云与基础架构",
+        v3Name: "人工智能与自动化",
+        v4Name: "物联网与工业4.0",
+        v5Name: "数字化转型",
+        v6Name: "战略与运营"
+      }
+    };
+
+    function setLang(lang) {
+      if (!i18n[lang]) return;
+
+      // Update html lang attribute
+      document.documentElement.lang = lang === 'zh' ? 'zh-Hans' : lang;
+
+      // Update page title
+      var titles = {
+        pt: 'Syphra Tecnologia — Parceiro Estratégico em Tecnologia & Operações',
+        en: 'Syphra Tecnologia — Strategic Technology & Operations Partner',
+        es: 'Syphra Tecnologia — Socio Estratégico en Tecnología y Operaciones',
+        zh: 'Syphra Tecnologia — 战略技术与运营合作伙伴'
+      };
+      document.title = titles[lang];
+
+      // Translate all data-i18n elements
+      var elements = document.querySelectorAll('[data-i18n]');
+      for (var i = 0; i < elements.length; i++) {
+        var el = elements[i];
+        var key = el.getAttribute('data-i18n');
+        if (i18n[lang][key] !== undefined) {
+          el.textContent = i18n[lang][key];
+        }
+      }
+
+      // Update language buttons
+      var buttons = document.querySelectorAll('.lang-btn');
+      for (var j = 0; j < buttons.length; j++) {
+        var btn = buttons[j];
+        var isActive = btn.getAttribute('data-lang') === lang;
+        if (isActive) {
+          btn.classList.add('active');
+          btn.setAttribute('aria-pressed', 'true');
+        } else {
+          btn.classList.remove('active');
+          btn.setAttribute('aria-pressed', 'false');
+        }
+      }
+    }
+
+    // Wire up language buttons after DOM is ready
+    document.addEventListener('DOMContentLoaded', function () {
+      var buttons = document.querySelectorAll('.lang-btn');
+      for (var i = 0; i < buttons.length; i++) {
+        (function(btn) {
+          btn.addEventListener('click', function () {
+            setLang(btn.getAttribute('data-lang'));
+          });
+        })(buttons[i]);
+      }
+    });
+  </script>
+
+</body>
+</html>
